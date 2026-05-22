@@ -343,10 +343,15 @@
       color: var(--accent);
       margin-bottom: 0.5rem;
     }
-    .edu-body p {
-      font-size: 1rem; /* FIX: was 0.88rem */
+	.edu-body p {
+      font-size: 1rem;
       color: var(--ink-muted);
       line-height: 1.65;
+      margin-bottom: 0.8rem; /* Adds space between paragraphs */
+    }
+    
+    .edu-body p:last-child { 
+      margin-bottom: 0; /* Prevents extra empty space at the bottom */
     }
     .edu-badge {
       display: inline-block;
