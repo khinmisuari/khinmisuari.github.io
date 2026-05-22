@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khin Josmar V. Misuari</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:        #18181B;
+      --ink-muted:  #52525B;
+      --ink-faint:  #A1A1AA;
+      --bg:         #FAFAF8;
+      --bg-subtle:  #F4F4F1;
+      --rule:       #E4E4E0;
+      --accent:     #1B3A5C;
+      --accent-warm:#8B4513;
+      --serif:      'EB Garamond', Georgia, serif;
+      --sans:       'Crimson Pro', 'EB Garamond', Georgia, serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,250,248,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    /* FIX: hamburger button — hidden on desktop */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: var(--ink);
+    }
+    .nav-toggle svg { display: block; }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 5rem 0; border-bottom: 1px solid var(--rule); }
+    section:last-of-type { border-bottom: none; }
+
+    /* ── HERO ── */
+    #hero { padding: 6rem 0 5rem; }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 4rem;
+      align-items: start;
+    }
+    .hero-text {}
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: 2.8rem;
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 1.4rem;
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--ink-muted);
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+    .hero-sub em {
+      font-style: italic;
+      color: var(--ink);
+    }
+    .hero-tags {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-bottom: 2.2rem;
+    }
+    .tag {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      background: #EBF0F5;
+      border: 1px solid #C9D8E8;
+      padding: 3px 10px;
+      border-radius: 3px;
+    }
+    .hero-links { display: flex; gap: 1.2rem; align-items: center; }
+    .btn {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 8px 18px;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: all 0.15s;
+      display: inline-block;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: 1px solid var(--accent);
+    }
+    .btn-primary:hover { background: #142d48; border-color: #142d48; }
+    .btn-ghost {
+      color: var(--ink-muted);
+      border: 1px solid var(--rule);
+      background: transparent;
+    }
+    .btn-ghost:hover { border-color: var(--ink-muted); color: var(--ink); }
+
+    .hero-photo {
+      width: 220px; height: 280px;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--rule);
+      background: var(--bg-subtle);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .hero-photo img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    /* ── SECTION HEADINGS ── */
+    .section-label {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 2.5rem;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: 1.9rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+
+    /* ── ABOUT ── */
+    /* FIX: was broken (CSS mixed with HTML); restored as a clean rule */
+    .about-body {
+      max-width: 680px;
+    }
+    .about-body p {
+      font-size: 1rem; /* FIX: was ~1.02rem but malformed; bumped to 1rem */
+      color: var(--ink-muted);
+      margin-bottom: 1.3rem;
+      line-height: 1.8;
+    }
+    .about-body p:last-child { margin-bottom: 0; }
+    .about-body strong { color: var(--ink); font-weight: 500; }
+
+    /* ── RESEARCH ── */
+    .research-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 2.5rem;
+    }
+    .research-item {
+      background: var(--bg);
+      padding: 1.6rem 1.8rem;
+    }
+    .research-item h3 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .research-item p {
+      font-size: 1rem; /* FIX: was 0.9rem */
+      color: var(--ink-muted);
+      line-height: 1.65;
+    }
+    .research-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+      margin-right: 8px;
+      vertical-align: middle;
+      position: relative; top: -1px;
+    }
+
+    /* ── HIGHLIGHTS ── */
+    .highlights-intro {
+      max-width: 640px;
+      font-size: 1rem; /* FIX: was 1.02rem (negligible, cleaned up) */
+      color: var(--ink-muted);
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+    .highlight-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+      margin-bottom: 3.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .highlight-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .highlight-block.reverse { direction: rtl; }
+    .highlight-block.reverse > * { direction: ltr; }
+    .highlight-content h3 {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.7rem;
+    }
+    .highlight-content p {
+      font-size: 1rem; /* FIX: was 0.92rem */
+      color: var(--ink-muted);
+      line-height: 1.75;
+      margin-bottom: 0.8rem;
+    }
+    .highlight-content p:last-child { margin-bottom: 0; }
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.2rem;
+      grid-column: 1 / -1;
+    }
+    .stat-pill {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent);
+      background: #EBF0F5;
+      border: 1px solid #C9D8E8;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* photo gallery */
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .photo-gallery .gal-img {
+      aspect-ratio: 4/3;
+      background: var(--bg-subtle);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .photo-gallery .gal-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .photo-gallery .gal-img.tall {
+      aspect-ratio: 3/4;
+      grid-row: span 2;
+    }
+
+    /* ── EDUCATION / CV ── */
+    .edu-list { margin-top: 2rem; }
+    .edu-entry {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 1.5rem;
+      padding: 1.6rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .edu-entry:last-child { border-bottom: none; }
+    .edu-date {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--ink-faint);
+      padding-top: 3px;
+      line-height: 1.5;
+    }
+    .edu-body h3 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+    .edu-body .edu-place {
+      font-size: 0.88rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .edu-body p {
+      font-size: 1rem; /* FIX: was 0.88rem */
+      color: var(--ink-muted);
+      line-height: 1.65;
+    }
+    .edu-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: #7C5010;
+      background: #FEF3E2;
+      border: 1px solid #F5C975;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* ── CONTACT ── */
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-text p {
+      font-size: 1rem; /* FIX: was 1.02rem */
+      color: var(--ink-muted);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .contact-links { list-style: none; margin-top: 1.8rem; }
+    .contact-links li { margin-bottom: 0.7rem; }
+    .contact-links a {
+      font-size: 0.9rem;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+    .contact-links a:hover { border-color: var(--accent); }
+    .contact-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-right: 0.6rem;
+    }
+    .ictp-note {
+      background: var(--bg-subtle);
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--accent);
+      padding: 1.4rem 1.6rem;
+      border-radius: 0 4px 4px 0;
+    }
+    .ictp-note p {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      line-height: 1.7;
+    }
+    .ictp-note strong { color: var(--ink); font-weight: 500; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 0;
+      text-align: center;
+    }
+    footer p {
+      font-size: 0.8rem;
+      color: var(--ink-faint);
+    }
+    .footer-credits {
+      margin-top: 0.5rem;
+      font-size: 0.78rem; /* FIX: was 0.7rem — too small */
+      color: var(--ink-faint);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      h1 { font-size: 2rem; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo { width: 160px; height: 200px; }
+      .research-grid { grid-template-columns: 1fr; }
+      .highlight-block { grid-template-columns: 1fr; }
+      .highlight-block.reverse { direction: ltr; }
+      .edu-entry { grid-template-columns: 1fr; gap: 0.3rem; }
+      .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+
+      /* FIX: mobile nav — collapse links behind hamburger */
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        position: absolute;
+        top: 56px; left: 0; right: 0;
+        background: rgba(250,250,248,0.97);
+        border-bottom: 1px solid var(--rule);
+        padding: 0.5rem 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a {
+        display: block;
+        padding: 0.8rem 2rem;
+        font-size: 0.88rem;
+        letter-spacing: 0.04em;
+      }
+      .nav-toggle { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#hero" class="nav-name">Khin Josmar V. Misuari</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about" onclick="closeNav()">About</a></li>
+      <li><a href="#research" onclick="closeNav()">Research</a></li>
+      <li><a href="#highlights" onclick="closeNav()">Highlights</a></li>
+      <li><a href="#education" onclick="closeNav()">CV</a></li>
+      <li><a href="#contact" onclick="closeNav()">Contact</a></li>
+    </ul>
+    <!-- FIX: hamburger button for mobile -->
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <line x1="2" y1="6"  x2="20" y2="6"/>
+        <line x1="2" y1="11" x2="20" y2="11"/>
+        <line x1="2" y1="16" x2="20" y2="16"/>
+      </svg>
+    </button>
+  </nav>
+
+  <script>
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks  = document.getElementById('nav-links');
+    navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    function closeNav() { navLinks.classList.remove('open'); }
+  </script>
+
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <p class="hero-eyebrow">Aspiring Theoretical Physicist</p>
+          <h1>Khin Josmar V. Misuari</h1>
+          <p class="hero-sub">
+            I am an incoming Postgraduate Diploma student at the <em>Abdus Salam International Centre for Theoretical Physics</em>
+            in the <em>High Energy, Cosmology, and Astroparticle Physics</em> field.
+          </p>
+          <div class="hero-tags">
+            <span class="tag">General Relativity</span>
+            <span class="tag">QFT in Curved Spacetime</span>
+            <span class="tag">Early Universe Cosmology</span>
+            <span class="tag">Quantum Gravity Phenomenology</span>
+          </div>
+          <div class="hero-links">
+            <a href="cv.pdf" class="btn btn-primary" target="_blank">Download CV</a>
+            <a href="#contact" class="btn btn-ghost">Get in touch</a>
+          </div>
+        </div>
+        <div>
+          <div class="hero-photo">
+            <!-- FIX: was photo.jpg — changed to photo.JPG to match actual filename (case-sensitive on GitHub Pages) -->
+            <img src="photo.JPG" alt="Khin Josmar V. Misuari" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <p class="section-label">About Me</p>
+      <div class="about-body">
+        <p>
+          I grew up in Carcar, a small city in southern Cebu, Philippines. I am a former out-of-school youth who left formal schooling after eighth grade at
+          the age of 15. I returned to formal education at the age of 18 in 2019 through the Alternative Learning System (ALS), a program in the Philippines
+          designed to give a second chance to out-of-school youth. Through the ALS Accreditation and Equivalency (A&amp;E) exam, I was able to bypass four years of
+          secondary school, entering directly into a BS in Applied Physics at the University of San Carlos (USC) in Cebu in the same year, without having seen calculus or a
+          physics equation on a board before. I finished my bachelor's degree at USC in June 2023 as a DOST-JLSS scholar.
+        </p>
+        <p>
+          Following my bachelor's degree, I fulfilled a mandatory national service obligation as a high school physics teacher at Sacred Heart School -
+          Ateneo de Cebu from 2023 to 2026, where I taught physics and coached students in various physics and astronomy competitions. After three years of fulfilling this
+          obligation, I will be joining the Abdus Salam International Centre for Theoretical Physics (ICTP) in Trieste as one of ten students selected globally
+          for the HECAP Diploma program starting September 2026. I am the first student from the University of San Carlos and from Cebu province to be accepted
+          into this highly competitive field.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="container">
+      <p class="section-label">Research Interests</p>
+      <h2>Where I want to work</h2>
+      <div class="research-grid">
+        <div class="research-item">
+          <h3><span class="research-dot"></span>QFT in Curved Spacetime</h3>
+          <p>
+            The renormalization structure of quantum fields in curved backgrounds is
+            genuinely less settled than in flat spacetime.
+            Observer-dependent vacua, stress-energy ambiguities, and the trans-Planckian problem in inflation
+            point toward something incomplete in our current framework, an incompleteness that I find motivating.
+          </p>
+        </div>
+        <div class="research-item">
+          <h3><span class="research-dot"></span>General Relativity</h3>
+          <p>
+            The field-theory approach to gravity (constructing geometry from physical
+            reasoning rather than imposing it as a prior mathematical framework) resonates with how I understand things most deeply: not simply that
+            a structure is what it is, but why it has to be that way.
+          </p>
+        </div>
+        <div class="research-item">
+          <h3><span class="research-dot"></span>Early Universe Cosmology</h3>
+          <p>
+            The thermal history of the universe, the nature of dark matter and dark energy,
+            and the observational signatures of high-energy physics in the CMB.
+            The gravitational wave window opened by LIGO represents an exciting
+            frontier for early-universe physics I am eager to engage with.
+          </p>
+        </div>
+        <div class="research-item">
+          <h3><span class="research-dot"></span>Quantum Gravity Phenomenology</h3>
+          <p>
+            My exposure to quantum gravity and compact object astrophysics was on the Generalized Uncertainty Principle (GUP) and how it modifies the
+            structure equations of white dwarfs and neutron stars. It remains a field I intend to return to.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="highlights">
+    <div class="container">
+      <p class="section-label">Selected Highlights</p>
+      <h2>Beyond the transcript</h2>
+      <p class="highlights-intro">
+        Some of what defines my trajectory doesn't fit neatly into a CV. These are the moments and projects that reveal something about how I approach
+        a problem, and what I do when the infrastructure around me doesn't exist yet.
+      </p>
+
+      <!-- FIX: this block was accidentally duplicated inside the <style> tag; it now appears only here, once, in the correct place -->
+      <div class="highlight-block reverse">
+        <div class="highlight-content">
+          <h3>Graduate courses as an undergraduate</h3>
+		<p>
+		To bridge the gap between the Applied Physics curriculum and the foundations I needed, I regularly attended advanced courses outside the curriculum. 
+		In some of them, I attended consistently enough to be included in assessments, using them to validate my self-studies against graduate standards.
+		</p>
+		<p>
+		The most notable was a graduate General Relativity course taught by Dr. Danilo M. Yanga, known for his unforgiving theoretical rigor. It was memorable
+		because right before the semester,  Typhoon Odette left Cebu without power for two months. In that enforced stillness, I worked 
+		through the physical math and GR textbooks that I had. The class became the ultimate  test of that isolated study, and I completed all coursework to 
+		the standard as the enrolled M.Sc. and Ph.D. students.
+		</p>
+		<p>
+		During my fourth year, I also attended Dr. Christopher Bernido's graduate Standard Model class through the midterm period, before prioritizing my 
+		undergraduate thesis work.
+		</p>
+          <div class="stat-row">
+            <span class="stat-pill">Graduate General Relativity: 1.00/1.00</span>
+            <span class="stat-pill">Graduate Mathematical Methods in Physics: 1.00/1.00</span>
+            <span class="stat-pill">Ranked 1st in both graduate cohorts</span>
+          </div>
+        </div>
+        <div class="photo-gallery" style="grid-template-columns: 1fr; gap: 1rem;">
+          <!-- GR visualization looks best at 16/9 -->
+          <div class="gal-img" style="aspect-ratio: 16/9;">
+            <img src="GR.png" alt="General Relativity Visualization" title="Image from Wikipedia" />
+          </div>
+		  
+		  <!-- 2. Odette Map (Turned black-and-white to match the aesthetic) -->
+		<div class="gal-img" style="aspect-ratio: auto;">
+			<img src="Odette.jpg" alt="Typhoon Odette Track" title="PAGASA" />
+		</div>
+          <!-- Exam paper should be 'auto' so it doesn't crop your name -->
+          <div class="gal-img" style="aspect-ratio: auto;">
+            <img src="SM.png" alt="Standard Model Exam Paper" />
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-block">
+        <!-- 1. Left Column: Text -->
+        <div class="highlight-content">
+          <h3>ASCEND: Physics</h3>
+          <p>I always held the belief that talent has always existed in the provinces, and that it just needed someone to show up and mentor
+          them properly. Beyond teaching my regular classes, I consistently trained and coached students for various physics and astronomy competitions.
+          Eventually, this initiative evolved into an official program called ASCEND: Physics, which bridges the gap between high school, university, and
+          Olympiad-level physics and astronomy. Over my three years running the program, we achieved great success in various local and national competitions.</p>
+        </div>
+
+        <!-- 2. Right Column: Photos -->
+        <div class="photo-gallery">
+          <div class="gal-img"><img src="competition1.jpg" alt="Philippine Physics Olympiad Team" title="Photo from Ateneo Hearter Digital" /></div>
+          <div class="gal-img"><img src="competition2.jpg" alt="USC Astronomy Quiz Bowl 2023" title="Photo from SHS - AdC Ignatian STEM Society" /></div>
+          <div class="gal-img"><img src="competition3.jpg" alt="USC Astronomy Quiz Bowl Champions" title="Photo from Ateneo Hearter Digital" /></div>
+		  <div class="gal-img"><img src="competition4.jpg" alt="USC Physics Quiz Bowl Champions" title="Photo from Ateneo Hearter Digital" /></div>
+        </div>
+
+        <!-- 3. Full Width Row: Stats -->
+        <div class="stat-row">
+          <span class="stat-pill">4 PPO 2026 National Finalists; 7 Qualifying Round Merit Awardees</span>
+          <span class="stat-pill">2 PPO 2025 National Finalists</span>
+          <span class="stat-pill">UP PISIKAalaman 2026 1st Runner-Up</span>
+          <span class="stat-pill">UP Big Bang: Astronomy Quiz Show 2026 1st Runner-Up</span>
+          <span class="stat-pill">Ateneo Physics Olympiad 2024 2nd Runner-Up</span>
+          <span class="stat-pill">USC Astronomy Quiz Bowl Champion (2023, 2024, 2025)</span>
+          <span class="stat-pill">USC Physics Quiz Bowl Champion (2024, 2025)</span>
+        </div>
+      </div>
+
+      <div class="highlight-block">
+        <div class="highlight-content">
+          <h3>High school students at a physics conference</h3>
+          <p>
+            Beyond competition preparation, I wanted to introduce my students to actual
+            scientific inquiry and scientific thinking. My students presented their work on "Measurement of g using smartphone and Doppler-based bifilar
+            pendulum system" in a subplenary oral presentation in Samahang Pisika ng Visayas at Mindanao (SPVM) 2025, a national physics conference
+            in the Philippines.
+          </p>
+        </div>
+        <div class="photo-gallery">
+          <div class="gal-img" style="aspect-ratio: 4/3; grid-column: span 2;">
+            <img src="SPVM.jpg" alt="Students presenting research" title="Photo from Ateneo Hearter Digital" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="container">
+      <p class="section-label">Education &amp; Experience</p>
+      <h2>Background</h2>
+      <div class="edu-list">
+
+        <div class="edu-entry">
+          <div class="edu-date">Sept. 2026 –<br/>Aug. 2027 <br/>(Expected)</div>
+          <div class="edu-body">
+            <h3>Postgraduate Diploma, HECAP <span class="edu-badge">Incoming</span></h3>
+            <p class="edu-place">Abdus Salam International Centre for Theoretical Physics (ICTP) · Trieste, Italy</p>
+            <p>
+              One of 10 students selected globally for the High Energy, Cosmology,
+              and Astroparticle Physics track. 5th Filipino admitted to HECAP since
+              the program's inception; first from the University of San Carlos and Cebu province.
+            </p>
+          </div>
+        </div>
+		
+		 <div class="edu-entry">
+          <div class="edu-date">Jul. 2023 –<br/>May 2026</div>
+          <div class="edu-body">
+            <h3>Senior High School Faculty &amp; Olympiad Coach</h3>
+            <p class="edu-place">Sacred Heart School – Ateneo de Cebu · Mandaue City, Philippines</p>
+            <p>
+              DOST scholarship return service obligation. Instructor for General Physics 1 &amp; 2
+              and Engineering Physics. Founded and led ASCEND: Physics enrichment program.
+              Head Coach, Physics &amp; Astronomy Olympiad Team.
+            </p>
+          </div>
+        </div>
+
+        <div class="edu-entry">
+          <div class="edu-date">Aug. 2019 –<br/>Jun. 2023</div>
+          <div class="edu-body">
+            <h3>B.S. Applied Physics</h3>
+            <p class="edu-place">University of San Carlos · Cebu City, Philippines</p>
+            <p>
+              GPA: 1.42/1.00
+            </p>
+			<p> Adviser: Dr. Danilo M. Yanga </p>
+			<p>
+			<em>Calculation of the Eliashberg Function of Particles in Graphene
+              in the Migdal-Eliashberg Theory of Superconductivity.</em> Analytically derived analytic expressions for the Eliashberg function using Matsubara
+              Green's function formalism. 2nd Place Best Thesis Award.
+			</p>
+          </div>
+        </div>
+
+
+      </div>
+      <div style="margin-top: 2.5rem;">
+        <a href="cv.pdf" class="btn btn-primary" target="_blank">Download full CV (PDF)</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <p class="section-label">Contact</p>
+      <div class="contact-inner">
+        <div class="contact-text">
+          <h2>Get in touch</h2>
+          <p>
+            In the coming months, I plan to apply to PhD programs in theoretical physics for Fall 2027 entry.
+            I am particularly interested in groups working on QFT in curved spacetime,
+            gravitational wave phenomenology, and early-universe cosmology.
+          </p>
+          <p>
+            I am also happy to hear from researchers, students, or educators
+            interested in building physics culture in the Global South.
+          </p>
+          <ul class="contact-links">
+            <li>
+              <span class="contact-label">Email</span>
+              <a href="mailto:kj.misuari@gmail.com">kj.misuari@gmail.com</a>
+            </li>
+            <li>
+              <span class="contact-label">LinkedIn</span>
+              <a href="https://linkedin.com/in/khin-josmar-misuari-178763168" target="_blank">linkedin.com/in/khin</a>
+            </li>
+            <li>
+              <span class="contact-label">Location</span>
+              <span style="font-size:0.9rem; color: var(--ink-muted);">
+                Cebu, Philippines · Trieste, Italy (from Sept. 2026)
+              </span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div class="ictp-note">
+            <p>
+              <strong>From September 2026</strong>, I will be in residence at ICTP Trieste
+              as part of the HECAP Diploma programme.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Khin Josmar V. Misuari · Cebu, Philippines · <a href="mailto:kj.misuari@gmail.com"
+        style="color: var(--ink-faint); text-decoration: none;">kj.misuari@gmail.com</a></p>
+      <p class="footer-credits">Photography credits: SPVM and ASCEND photos from Ateneo Hearter Digital. USC Astro QB 2023 from SHS - AdC ISS. 
+	  General Relativity visualization from Wikipedia. Typhoon Odette track from PAGASA</p>
+    </div>
+  </footer>
+
+</body>
+</html>
