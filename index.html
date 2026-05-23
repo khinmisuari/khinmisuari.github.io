@@ -64,7 +64,6 @@
       transition: color 0.15s;
     }
     .nav-links a:hover { color: var(--ink); }
-    /* FIX: hamburger button — hidden on desktop */
     .nav-toggle {
       display: none;
       background: none;
@@ -189,12 +188,11 @@
     }
 
     /* ── ABOUT ── */
-    /* FIX: was broken (CSS mixed with HTML); restored as a clean rule */
     .about-body {
       max-width: 680px;
     }
     .about-body p {
-      font-size: 1rem; /* FIX: was ~1.02rem but malformed; bumped to 1rem */
+      font-size: 1rem;
       color: var(--ink-muted);
       margin-bottom: 1.3rem;
       line-height: 1.8;
@@ -225,7 +223,7 @@
       margin-bottom: 0.5rem;
     }
     .research-item p {
-      font-size: 1rem; /* FIX: was 0.9rem */
+      font-size: 1rem;
       color: var(--ink-muted);
       line-height: 1.65;
     }
@@ -242,7 +240,7 @@
     /* ── HIGHLIGHTS ── */
     .highlights-intro {
       max-width: 640px;
-      font-size: 1rem; /* FIX: was 1.02rem (negligible, cleaned up) */
+      font-size: 1rem;
       color: var(--ink-muted);
       line-height: 1.8;
       margin-bottom: 3rem;
@@ -267,7 +265,7 @@
       margin-bottom: 0.7rem;
     }
     .highlight-content p {
-      font-size: 1rem; /* FIX: was 0.92rem */
+      font-size: 1rem;
       color: var(--ink-muted);
       line-height: 1.75;
       margin-bottom: 0.8rem;
@@ -343,15 +341,14 @@
       color: var(--accent);
       margin-bottom: 0.5rem;
     }
-	.edu-body p {
+    .edu-body p {
       font-size: 1rem;
       color: var(--ink-muted);
       line-height: 1.65;
-      margin-bottom: 0.8rem; /* Adds space between paragraphs */
+      margin-bottom: 0.8rem;
     }
-    
-    .edu-body p:last-child { 
-      margin-bottom: 0; /* Prevents extra empty space at the bottom */
+    .edu-body p:last-child {
+      margin-bottom: 0;
     }
     .edu-badge {
       display: inline-block;
@@ -375,7 +372,7 @@
       align-items: start;
     }
     .contact-text p {
-      font-size: 1rem; /* FIX: was 1.02rem */
+      font-size: 1rem;
       color: var(--ink-muted);
       line-height: 1.8;
       margin-bottom: 1rem;
@@ -423,9 +420,46 @@
     }
     .footer-credits {
       margin-top: 0.5rem;
-      font-size: 0.78rem; /* FIX: was 0.7rem — too small */
+      font-size: 0.78rem;
       color: var(--ink-faint);
     }
+
+    /* ── LIGHTBOX ── */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+      backdrop-filter: blur(4px);
+    }
+    .lightbox-overlay.open { display: flex; }
+    .lightbox-overlay img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+      cursor: default;
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 1.2rem;
+      right: 1.5rem;
+      color: #fff;
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+      opacity: 0.7;
+      background: none;
+      border: none;
+      transition: opacity 0.15s;
+    }
+    .lightbox-close:hover { opacity: 1; }
+    img { cursor: zoom-in; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 680px) {
@@ -438,7 +472,6 @@
       .edu-entry { grid-template-columns: 1fr; gap: 0.3rem; }
       .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
 
-      /* FIX: mobile nav — collapse links behind hamburger */
       .nav-links {
         display: none;
         flex-direction: column;
@@ -470,10 +503,9 @@
       <li><a href="#research" onclick="closeNav()">Research</a></li>
       <li><a href="#highlights" onclick="closeNav()">Highlights</a></li>
       <li><a href="#education" onclick="closeNav()">CV</a></li>
-	  <li><a href="#notes" onclick="closeNav()">Notes</a></li>
+      <li><a href="#notes" onclick="closeNav()">Notes</a></li>
       <li><a href="#contact" onclick="closeNav()">Contact</a></li>
     </ul>
-    <!-- FIX: hamburger button for mobile -->
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
         <line x1="2" y1="6"  x2="20" y2="6"/>
@@ -482,13 +514,6 @@
       </svg>
     </button>
   </nav>
-
-  <script>
-    const navToggle = document.getElementById('nav-toggle');
-    const navLinks  = document.getElementById('nav-links');
-    navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-    function closeNav() { navLinks.classList.remove('open'); }
-  </script>
 
   <section id="hero">
     <div class="container">
@@ -513,7 +538,6 @@
         </div>
         <div>
           <div class="hero-photo">
-            <!-- FIX: was photo.jpg — changed to photo.JPG to match actual filename (case-sensitive on GitHub Pages) -->
             <img src="photo.JPG" alt="Khin Josmar V. Misuari" />
           </div>
         </div>
@@ -539,11 +563,11 @@
           for the HECAP Diploma program starting September 2026. I am the first student from the University of San Carlos and from Cebu province to be accepted
           into this highly competitive field.
         </p>
-		<p>
-			Growing up in Carcar, the concept of becoming a research scientist was virtually non-existent. Beyond my own research trajectory, I want to establish the 
-			precedent of a theoretical physicist from my hometown, proving to future students in the provinces that a path into global frontier research is a 
-			viable and achievable reality.
-		</p>
+        <p>
+          Growing up in Carcar, the concept of becoming a research scientist was virtually non-existent. Beyond my own research trajectory, I want to establish the
+          precedent of a theoretical physicist from my hometown, proving to future students in the provinces that a path into global frontier research is a
+          viable and achievable reality.
+        </p>
       </div>
     </div>
   </section>
@@ -599,24 +623,23 @@
         a problem, and what I do when the infrastructure around me doesn't exist yet.
       </p>
 
-      <!-- FIX: this block was accidentally duplicated inside the <style> tag; it now appears only here, once, in the correct place -->
       <div class="highlight-block reverse">
         <div class="highlight-content">
           <h3>Graduate courses as an undergraduate</h3>
-		<p>
-		To bridge the gap between the Applied Physics curriculum and the foundations I needed, I regularly attended advanced courses outside the curriculum. 
-		In some of them, I attended consistently enough to be included in assessments, using them to validate my self-studies against graduate standards.
-		</p>
-		<p>
-		The most notable was a graduate General Relativity course taught by Dr. Danilo M. Yanga, known for his unforgiving theoretical rigor. It was memorable
-		because right before the semester,  Typhoon Odette left Cebu without power for two months. In that enforced stillness, I worked 
-		through the physical math and GR textbooks that I had. The class became the ultimate  test of that isolated study, and I completed all coursework to 
-		the standard as the enrolled M.Sc. and Ph.D. students.
-		</p>
-		<p>
-		During my fourth year, I also attended Dr. Christopher Bernido's graduate Standard Model class through the midterm period, before prioritizing my 
-		undergraduate thesis work.
-		</p>
+          <p>
+            To bridge the gap between the Applied Physics curriculum and the foundations I needed, I regularly attended advanced courses outside the curriculum.
+            In some of them, I attended consistently enough to be included in assessments, using them to validate my self-studies against graduate standards.
+          </p>
+          <p>
+            The most notable was a graduate General Relativity course taught by Dr. Danilo M. Yanga, known for his unforgiving theoretical rigor. It was memorable
+            because right before the semester, Typhoon Odette left Cebu without power for two months. In that enforced stillness, I worked
+            through the physical math and GR textbooks that I had. The class became the ultimate test of that isolated study, and I completed all coursework to
+            the standard as the enrolled M.Sc. and Ph.D. students.
+          </p>
+          <p>
+            During my fourth year, I also attended Dr. Christopher Bernido's graduate Standard Model class through the midterm period, before prioritizing my
+            undergraduate thesis work.
+          </p>
           <div class="stat-row">
             <span class="stat-pill">Graduate General Relativity: 1.00/1.00</span>
             <span class="stat-pill">Graduate Mathematical Methods in Physics: 1.00/1.00</span>
@@ -624,23 +647,19 @@
           </div>
         </div>
         <div class="photo-gallery" style="grid-template-columns: 1fr; gap: 1rem;">
-		<!-- Exam paper should be 'auto' so it doesn't crop your name -->
           <div class="gal-img" style="aspect-ratio: auto;">
-            <img src="SM.jpg" alt="Standard Model Class" title = "Standard Model class with Dr. Bernido" />
+            <img src="SM.jpg" alt="Standard Model Class" title="Standard Model class with Dr. Bernido" />
           </div>
-          <!-- GR visualization looks best at 16/9 -->
           <div class="gal-img" style="aspect-ratio: 16/9;">
             <img src="GR.png" alt="General Relativity Visualization" title="Image from Wikipedia" />
           </div>
-		  <!-- 2. Odette Map (Turned black-and-white to match the aesthetic) -->
-		<div class="gal-img" style="aspect-ratio: auto;">
-			<img src="Odette.jpg" alt="Typhoon Odette Track" title="PAGASA" />
-		</div>
+          <div class="gal-img" style="aspect-ratio: auto;">
+            <img src="Odette.jpg" alt="Typhoon Odette Track" title="PAGASA" />
+          </div>
         </div>
       </div>
 
       <div class="highlight-block">
-        <!-- 1. Left Column: Text -->
         <div class="highlight-content">
           <h3>ASCEND: Physics</h3>
           <p>I always held the belief that talent has always existed in the provinces, and that it just needed someone to show up and mentor
@@ -648,16 +667,12 @@
           Eventually, this initiative evolved into an official program called ASCEND: Physics, which bridges the gap between high school, university, and
           Olympiad-level physics and astronomy. Over my three years running the program, we achieved great success in various local and national competitions.</p>
         </div>
-
-        <!-- 2. Right Column: Photos -->
         <div class="photo-gallery">
           <div class="gal-img"><img src="competition1.jpg" alt="Philippine Physics Olympiad Team" title="Photo from Ateneo Hearter Digital" /></div>
           <div class="gal-img"><img src="competition2.jpg" alt="USC Astronomy Quiz Bowl 2023" title="Photo from SHS - AdC Ignatian STEM Society" /></div>
           <div class="gal-img"><img src="competition3.jpg" alt="USC Astronomy Quiz Bowl Champions" title="Photo from Ateneo Hearter Digital" /></div>
-		  <div class="gal-img"><img src="competition4.jpg" alt="USC Physics Quiz Bowl Champions" title="Photo from Ateneo Hearter Digital" /></div>
+          <div class="gal-img"><img src="competition4.jpg" alt="USC Physics Quiz Bowl Champions" title="Photo from Ateneo Hearter Digital" /></div>
         </div>
-
-        <!-- 3. Full Width Row: Stats -->
         <div class="stat-row">
           <span class="stat-pill">4 PPO 2026 National Finalists; 7 Qualifying Round Merit Awardees</span>
           <span class="stat-pill">2 PPO 2025 National Finalists</span>
@@ -689,35 +704,33 @@
     </div>
   </section>
 
-<section id="notes">
+  <section id="notes">
     <div class="container">
       <p class="section-label">Notes &amp; Advocacy</p>
       <h2>Selected Notes &amp; Educational Advocacy</h2>
       <p class="highlights-intro">
-        Beyond theoretical research, I am an advocate for intellectual integrity and the development of science in the Philippines. This space compiles my typed 
-		LaTeX notes/derivations, problems I've written for competitive Olympiad training, and essays on academic integerity. If you are a student working 
-		through the notes or problems and want to discuss your solutions or need clarification, feel free to reach out via email.
+        Beyond theoretical research, I am an advocate for intellectual integrity and the development of science in the Philippines. This space compiles my typed
+        LaTeX notes/derivations, problems I've written for competitive Olympiad training, and essays on academic integrity. If you are a student working
+        through the notes or problems and want to discuss your solutions or need clarification, feel free to reach out via email.
       </p>
 
       <div class="research-grid">
-        <!-- Item 1: Derivations -->
         <div class="research-item">
           <h3><span class="research-dot"></span>Textbook Derivations</h3>
           <p>
             Step-by-step derivations and solutions to advanced problems in selected topics.
           </p>
           <ul style="list-style: none; margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem;">
-            <li><a href="khinmisuari_GR_EFE.pdf" target="_blank" style="color: var(--accent); text-decoration: none; font-size: 0.88rem; font-weight: 
-			500; border-bottom: 1px solid transparent; transition: border-color 0.15s;" onmouseover="this.style.borderColor='var(--accent)'" 
-			onmouseout="this.style.borderColor='transparent'">↳ Derivation of the Einstein Field Equations (PDF)</a></li>
+            <li><a href="khinmisuari_GR_EFE.pdf" target="_blank" style="color: var(--accent); text-decoration: none; font-size: 0.88rem; font-weight:
+            500; border-bottom: 1px solid transparent; transition: border-color 0.15s;" onmouseover="this.style.borderColor='var(--accent)'"
+            onmouseout="this.style.borderColor='transparent'">↳ Derivation of the Einstein Field Equations (PDF)</a></li>
             <li><span style="color: var(--ink-muted); font-size: 0.88rem; font-weight: 500;">
-			↳ Solutions to Selected Problems in Sean Carroll's Spacetime & Geometry<em style="opacity: 0.7;">(Coming Soon)</em></span></li>
+            ↳ Solutions to Selected Problems in Sean Carroll's Spacetime &amp; Geometry<em style="opacity: 0.7;">(Coming Soon)</em></span></li>
             <li><span style="color: var(--ink-muted); font-size: 0.88rem; font-weight: 500;">
-			↳ Some derivations in Statistical Mechanics <em style="opacity: 0.7;">(Coming Soon)</em></span></li>
+            ↳ Some derivations in Statistical Mechanics <em style="opacity: 0.7;">(Coming Soon)</em></span></li>
           </ul>
         </div>
 
-        <!-- Item 2: Olympiad Problems -->
         <div class="research-item">
           <h3><span class="research-dot"></span>Olympiad Problems</h3>
           <p>
@@ -725,15 +738,14 @@
           </p>
           <ul style="list-style: none; margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem;">
             <li><span style="color: var(--ink-muted); font-size: 0.88rem; font-weight: 500;">
-			↳ Philippine Physics Olympiad Mock Exam <em style="opacity: 0.7;">(Coming Soon)</em></span></li>
+            ↳ Philippine Physics Olympiad Mock Exam <em style="opacity: 0.7;">(Coming Soon)</em></span></li>
             <li><span style="color: var(--ink-muted); font-size: 0.88rem; font-weight: 500;">
-			↳ Philippine Physics Olympiad Mock Exam #2 <em style="opacity: 0.7;">(Coming Soon)</em></span></li>
+            ↳ Philippine Physics Olympiad Mock Exam #2 <em style="opacity: 0.7;">(Coming Soon)</em></span></li>
             <li><span style="color: var(--ink-muted); font-size: 0.88rem; font-weight: 500;">
-			↳ Astronomy Quiz Bowl Practice <em style="opacity: 0.7;">(Coming Soon)</em></span></li>
+            ↳ Astronomy Quiz Bowl Practice <em style="opacity: 0.7;">(Coming Soon)</em></span></li>
           </ul>
         </div>
-		
-		<!-- Item 3: Writing & Advocacy -->
+
         <div class="research-item" style="grid-column: 1 / -1;">
           <h3><span class="research-dot"></span>Writing &amp; Advocacy</h3>
           <p>
@@ -741,10 +753,9 @@
           </p>
           <ul style="list-style: none; margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem;">
             <li><span style="color: var(--ink-muted); font-size: 0.88rem; font-weight: 500;">
-			↳ The Rise of Predatory STEM Competitions <em style="opacity: 0.7;">(Coming Soon)</em></span></li>
+            ↳ The Rise of Predatory STEM Competitions <em style="opacity: 0.7;">(Coming Soon)</em></span></li>
           </ul>
         </div>
-		
       </div>
     </div>
   </section>
@@ -767,8 +778,8 @@
             </p>
           </div>
         </div>
-		
-		 <div class="edu-entry">
+
+        <div class="edu-entry">
           <div class="edu-date">Jul. 2023 –<br/>May 2026</div>
           <div class="edu-body">
             <h3>Senior High School Faculty &amp; Olympiad Coach</h3>
@@ -789,22 +800,19 @@
             <p>
               GPA: 1.42/1.00
             </p>
-			<p> Adviser: Dr. Danilo M. Yanga </p>
-			<p>
-			<em>Calculation of the Eliashberg Function of Particles in Graphene
+            <p>Adviser: Dr. Danilo M. Yanga</p>
+            <p>
+              <em>Calculation of the Eliashberg Function of Particles in Graphene
               in the Migdal-Eliashberg Theory of Superconductivity.</em> Analytically derived expressions for the Eliashberg function using Matsubara
               Green's function formalism. 2nd Place Best Thesis Award.
-			</p>
-			  <p>
-			  </p>
-			<p>
-			Although this may appear distant from astrophysics, there are transferable mathematical machineries. For instance, the Matsubara formalism I used to 
-			compute finite-temperature self-energies is the Euclidean-signature analogue of 
-			the thermal field theory techniques used in early-universe thermodynamics and neutron star structure.
-			</p>
+            </p>
+            <p>
+              Although this may appear distant from astrophysics, there are transferable mathematical machineries. For instance, the Matsubara formalism I used to
+              compute finite-temperature self-energies is the Euclidean-signature analogue of
+              the thermal field theory techniques used in early-universe thermodynamics and neutron star structure.
+            </p>
           </div>
         </div>
-
 
       </div>
       <div style="margin-top: 2.5rem;">
@@ -861,10 +869,51 @@
     <div class="container">
       <p>Khin Josmar V. Misuari · Cebu, Philippines · <a href="mailto:kj.misuari@gmail.com"
         style="color: var(--ink-faint); text-decoration: none;">kj.misuari@gmail.com</a></p>
-      <p class="footer-credits">Photography credits: SPVM and ASCEND photos from Ateneo Hearter Digital. USC Astro QB 2023 from SHS - AdC ISS. 
-	  General Relativity visualization from Wikipedia. Typhoon Odette track from PAGASA</p>
+      <p class="footer-credits">Photography credits: SPVM and ASCEND photos from Ateneo Hearter Digital. USC Astro QB 2023 from SHS - AdC ISS.
+      General Relativity visualization from Wikipedia. Typhoon Odette track from PAGASA</p>
     </div>
   </footer>
+
+  <!-- ── LIGHTBOX ── -->
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">&times;</button>
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+
+  <script>
+    // Nav toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks  = document.getElementById('nav-links');
+    navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    function closeNav() { navLinks.classList.remove('open'); }
+
+    // Lightbox
+    const lightbox      = document.getElementById('lightbox');
+    const lightboxImg   = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    document.querySelectorAll('img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    lightbox.addEventListener('click', e => {
+      if (e.target !== lightboxImg) closeLightbox();
+    });
+    lightboxClose.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  </script>
 
 </body>
 </html>
