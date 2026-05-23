@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="google-site-verification" content="qSoN9tReIqdGue4OlSO4ZZfgh3DnF2SkBL4qJk3O6nk" />
+  <meta name="google-site-verification" content="qSoN9tReIqdGue4OlSO4ZZfgh3DnF2SkBL4qJk3O6nk" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Khin Josmar V. Misuari</title>
@@ -87,7 +87,6 @@
       gap: 4rem;
       align-items: start;
     }
-    .hero-text {}
     .hero-eyebrow {
       font-family: var(--sans);
       font-size: 0.78rem;
@@ -148,12 +147,24 @@
       border: 1px solid var(--accent);
     }
     .btn-primary:hover { background: #142d48; border-color: #142d48; }
+    .btn-primary:focus-visible {
+      background: #142d48;
+      border-color: #142d48;
+      outline: none;
+      box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+    }
     .btn-ghost {
       color: var(--ink-muted);
       border: 1px solid var(--rule);
       background: transparent;
     }
     .btn-ghost:hover { border-color: var(--ink-muted); color: var(--ink); }
+    .btn-ghost:focus-visible {
+      border-color: var(--ink-muted);
+      color: var(--ink);
+      outline: none;
+      box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+    }
 
     .hero-photo {
       width: 220px; height: 280px;
@@ -237,7 +248,7 @@
       position: relative; top: -1px;
     }
 
-    /* ── HIGHLIGHTS ── */
+    /* ── HIGHLIGHTS & PHOTOS ── */
     .highlights-intro {
       max-width: 640px;
       font-size: 1rem;
@@ -287,8 +298,6 @@
       padding: 4px 12px;
       border-radius: 20px;
     }
-
-    /* photo gallery */
     .photo-gallery {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -307,9 +316,38 @@
     .photo-gallery .gal-img img {
       width: 100%; height: 100%; object-fit: cover; display: block;
     }
-    .photo-gallery .gal-img.tall {
-      aspect-ratio: 3/4;
-      grid-row: span 2;
+
+    /* ── NOTES LISTS ── */
+    .notes-list {
+      list-style: none;
+      margin-top: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .notes-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+      outline: none;
+    }
+    .notes-link:hover { border-color: var(--accent); }
+    .notes-link:focus-visible {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+      border-radius: 2px;
+    }
+    .notes-text {
+      color: var(--ink-muted);
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+    .notes-text em {
+      opacity: 0.7;
+      font-style: italic;
     }
 
     /* ── EDUCATION / CV ── */
@@ -387,6 +425,12 @@
       transition: border-color 0.15s;
     }
     .contact-links a:hover { border-color: var(--accent); }
+    .contact-links a:focus-visible {
+      border-color: var(--accent);
+      outline: none;
+      box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+      border-radius: 2px;
+    }
     .contact-label {
       font-size: 0.75rem;
       font-weight: 500;
@@ -425,6 +469,15 @@
     }
 
     /* ── LIGHTBOX ── */
+    .zoomable {
+      cursor: zoom-in;
+    }
+    /* Only show focus ring for keyboard users, not mouse clicks */
+    .zoomable:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--accent);
+      border-radius: 2px;
+    }
     .lightbox-overlay {
       display: none;
       position: fixed;
@@ -459,7 +512,7 @@
       transition: opacity 0.15s;
     }
     .lightbox-close:hover { opacity: 1; }
-    img { cursor: zoom-in; }
+    .lightbox-close:focus-visible { opacity: 1; outline: none; box-shadow: 0 0 0 2px #fff; border-radius: 2px; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 680px) {
@@ -538,7 +591,7 @@
         </div>
         <div>
           <div class="hero-photo">
-            <img src="photo.JPG" alt="Khin Josmar V. Misuari" />
+            <img src="photo.JPG" alt="Khin Josmar V. Misuari" class="zoomable" tabindex="0" />
           </div>
         </div>
       </div>
@@ -648,13 +701,13 @@
         </div>
         <div class="photo-gallery" style="grid-template-columns: 1fr; gap: 1rem;">
           <div class="gal-img" style="aspect-ratio: auto;">
-            <img src="SM.jpg" alt="Standard Model Class" title="Standard Model class with Dr. Bernido" />
+            <img src="SM.jpg" alt="Standard Model Class" title="Standard Model class with Dr. Bernido" class="zoomable" tabindex="0" />
           </div>
           <div class="gal-img" style="aspect-ratio: 16/9;">
-            <img src="GR.png" alt="General Relativity Visualization" title="Image from Wikipedia" />
+            <img src="GR.png" alt="General Relativity Visualization" title="Image from Wikipedia" class="zoomable" tabindex="0" />
           </div>
           <div class="gal-img" style="aspect-ratio: auto;">
-            <img src="Odette.jpg" alt="Typhoon Odette Track" title="PAGASA" />
+            <img src="Odette.jpg" alt="Typhoon Odette Track" title="PAGASA" class="zoomable" tabindex="0" />
           </div>
         </div>
       </div>
@@ -668,10 +721,10 @@
           Olympiad-level physics and astronomy. Over my three years running the program, we achieved great success in various local and national competitions.</p>
         </div>
         <div class="photo-gallery">
-          <div class="gal-img"><img src="competition1.jpg" alt="Philippine Physics Olympiad Team" title="Photo from Ateneo Hearter Digital" /></div>
-          <div class="gal-img"><img src="competition2.jpg" alt="USC Astronomy Quiz Bowl 2023" title="Photo from SHS - AdC Ignatian STEM Society" /></div>
-          <div class="gal-img"><img src="competition3.jpg" alt="USC Astronomy Quiz Bowl Champions" title="Photo from Ateneo Hearter Digital" /></div>
-          <div class="gal-img"><img src="competition4.jpg" alt="USC Physics Quiz Bowl Champions" title="Photo from Ateneo Hearter Digital" /></div>
+          <div class="gal-img"><img src="competition1.jpg" alt="Philippine Physics Olympiad Team" title="Photo from Ateneo Hearter Digital" class="zoomable" tabindex="0" /></div>
+          <div class="gal-img"><img src="competition2.jpg" alt="USC Astronomy Quiz Bowl 2023" title="Photo from SHS - AdC Ignatian STEM Society" class="zoomable" tabindex="0" /></div>
+          <div class="gal-img"><img src="competition3.jpg" alt="USC Astronomy Quiz Bowl Champions" title="Photo from Ateneo Hearter Digital" class="zoomable" tabindex="0" /></div>
+          <div class="gal-img"><img src="competition4.jpg" alt="USC Physics Quiz Bowl Champions" title="Photo from Ateneo Hearter Digital" class="zoomable" tabindex="0" /></div>
         </div>
         <div class="stat-row">
           <span class="stat-pill">4 PPO 2026 National Finalists; 7 Qualifying Round Merit Awardees</span>
@@ -696,7 +749,7 @@
         </div>
         <div class="photo-gallery">
           <div class="gal-img" style="aspect-ratio: 4/3; grid-column: span 2;">
-            <img src="SPVM.jpg" alt="Students presenting research" title="Photo from Ateneo Hearter Digital" />
+            <img src="SPVM.jpg" alt="Students presenting research" title="Photo from Ateneo Hearter Digital" class="zoomable" tabindex="0" />
           </div>
         </div>
       </div>
@@ -720,14 +773,10 @@
           <p>
             Step-by-step derivations and solutions to advanced problems in selected topics.
           </p>
-          <ul style="list-style: none; margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem;">
-            <li><a href="khinmisuari_GR_EFE.pdf" target="_blank" style="color: var(--accent); text-decoration: none; font-size: 0.88rem; font-weight:
-            500; border-bottom: 1px solid transparent; transition: border-color 0.15s;" onmouseover="this.style.borderColor='var(--accent)'"
-            onmouseout="this.style.borderColor='transparent'">↳ Derivation of the Einstein Field Equations (PDF)</a></li>
-            <li><span style="color: var(--ink-muted); font-size: 0.88rem; font-weight: 500;">
-            ↳ Solutions to Selected Problems in Sean Carroll's Spacetime &amp; Geometry<em style="opacity: 0.7;">(Coming Soon)</em></span></li>
-            <li><span style="color: var(--ink-muted); font-size: 0.88rem; font-weight: 500;">
-            ↳ Some derivations in Statistical Mechanics <em style="opacity: 0.7;">(Coming Soon)</em></span></li>
+          <ul class="notes-list">
+            <li><a href="khinmisuari_GR_EFE.pdf" target="_blank" class="notes-link">↳ Derivation of the Einstein Field Equations (PDF)</a></li>
+            <li><span class="notes-text">↳ Solutions to Selected Problems in Sean Carroll's Spacetime &amp; Geometry <em>(Coming Soon)</em></span></li>
+            <li><span class="notes-text">↳ Some derivations in Statistical Mechanics <em>(Coming Soon)</em></span></li>
           </ul>
         </div>
 
@@ -736,13 +785,10 @@
           <p>
             Original mechanics, electromagnetism, modern physics, and astrophysics problems I created to train my high school students.
           </p>
-          <ul style="list-style: none; margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem;">
-            <li><span style="color: var(--ink-muted); font-size: 0.88rem; font-weight: 500;">
-            ↳ Philippine Physics Olympiad Mock Exam <em style="opacity: 0.7;">(Coming Soon)</em></span></li>
-            <li><span style="color: var(--ink-muted); font-size: 0.88rem; font-weight: 500;">
-            ↳ Philippine Physics Olympiad Mock Exam #2 <em style="opacity: 0.7;">(Coming Soon)</em></span></li>
-            <li><span style="color: var(--ink-muted); font-size: 0.88rem; font-weight: 500;">
-            ↳ Astronomy Quiz Bowl Practice <em style="opacity: 0.7;">(Coming Soon)</em></span></li>
+          <ul class="notes-list">
+            <li><span class="notes-text">↳ Philippine Physics Olympiad Mock Exam <em>(Coming Soon)</em></span></li>
+            <li><span class="notes-text">↳ Philippine Physics Olympiad Mock Exam #2 <em>(Coming Soon)</em></span></li>
+            <li><span class="notes-text">↳ Astronomy Quiz Bowl Practice <em>(Coming Soon)</em></span></li>
           </ul>
         </div>
 
@@ -751,9 +797,8 @@
           <p>
             Articles and essays on STEM education, academic integrity, and the development of physics infrastructure in the Philippines.
           </p>
-          <ul style="list-style: none; margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem;">
-            <li><span style="color: var(--ink-muted); font-size: 0.88rem; font-weight: 500;">
-            ↳ The Rise of Predatory STEM Competitions <em style="opacity: 0.7;">(Coming Soon)</em></span></li>
+          <ul class="notes-list">
+            <li><span class="notes-text">↳ The Rise of Predatory STEM Competitions <em>(Coming Soon)</em></span></li>
           </ul>
         </div>
       </div>
@@ -875,8 +920,8 @@
   </footer>
 
   <!-- ── LIGHTBOX ── -->
-  <div class="lightbox-overlay" id="lightbox">
-    <button class="lightbox-close" id="lightbox-close">&times;</button>
+  <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close image">&times;</button>
     <img id="lightbox-img" src="" alt="" />
   </div>
 
@@ -888,16 +933,35 @@
     function closeNav() { navLinks.classList.remove('open'); }
 
     // Lightbox
-    const lightbox      = document.getElementById('lightbox');
-    const lightboxImg   = document.getElementById('lightbox-img');
-    const lightboxClose = document.getElementById('lightbox-close');
+    const lightbox       = document.getElementById('lightbox');
+    const lightboxImg    = document.getElementById('lightbox-img');
+    const lightboxClose  = document.getElementById('lightbox-close');
+    const zoomableImages = document.querySelectorAll('img.zoomable');
 
-    document.querySelectorAll('img').forEach(img => {
-      img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt;
-        lightbox.classList.add('open');
-        document.body.style.overflow = 'hidden';
+    let lastFocused = null; // track which image opened the lightbox
+
+    function openLightbox(img) {
+      lastFocused = img;
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt || 'Enlarged image view';
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      lightboxClose.focus(); // move focus to close button for keyboard users
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+      if (lastFocused) lastFocused.focus(); // return focus to the triggering image
+    }
+
+    zoomableImages.forEach(img => {
+      img.addEventListener('click', () => openLightbox(img));
+      img.addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          openLightbox(img);
+        }
       });
     });
 
@@ -906,13 +970,8 @@
     });
     lightboxClose.addEventListener('click', closeLightbox);
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
     });
-
-    function closeLightbox() {
-      lightbox.classList.remove('open');
-      document.body.style.overflow = '';
-    }
   </script>
 
 </body>
